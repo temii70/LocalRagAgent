@@ -2,7 +2,7 @@
 
 [Project overview](../README.md)
 
-The root README links the [document Q&A video](../01-document-qa.mp4) and [local coding video](../02-local-coding.mp4..mp4). Their clickable preview images are actual stills from those recordings, stored in `demo/`.
+The root README displays animated GIF previews of the [document Q&A video](../01-document-qa.mp4) and [smaller local coding video](demo/02-local-coding-web.mp4). The animations are converted from the actual recordings and stored as [document-qa.gif](demo/document-qa.gif) and [local-coding.gif](demo/local-coding.gif). Static PNG previews are also available in `demo/`. The original MP4 recordings remain unchanged.
 
 The [Continue starter exercise](demo/recall_exercise.py.txt) intentionally contains a recall calculation bug. Copy it into an ignored `evaluation/runs/continue-demo/` folder before editing; the starter should pass four of five cases, and a correct fix should pass all five. The working project scorer is [evaluation/score.py](../evaluation/score.py). Keep raw takes in ignored `assets/recordings/`.
 
