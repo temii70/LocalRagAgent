@@ -1,0 +1,3 @@
+# Verified against the existing WSL Ollama alias; inherits upstream defaults.
+FROM gpt-oss:20b
+PARAMETER num_ctx 16384
