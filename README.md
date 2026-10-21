@@ -2,7 +2,7 @@
 
 A privacy-focused, GPU-accelerated AI workspace powered by OpenWebUI, Ollama, hybrid retrieval, reranking, and permission-gated MCP tools.
 
-## Watch the demos
+## Demos
 
 ### Document Q&A with source verification
 
@@ -20,23 +20,25 @@ Continue proposes a fix to a recall calculation using GPT-OSS.
 
 [Open full-size animation](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/assets/demo/local-coding.gif) | [Full-resolution MP4](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/assets/demo/02-local-coding-web.mp4)
 
-These are looping GIF previews. Click an animation to view it at full size; the MP4 links open or download the full-resolution recordings. Recordings are edited for brevity.
+Recordings are edited for brevity. Full-size animations and MP4 recordings are linked above.
 
-I built the integration, model configuration, retrieval evaluation, and approval-based workflows around an existing local AI stack. It brings document Q&A, coding assistance, and reviewed tool actions onto a Windows 11 workstation with WSL2 and a single RTX 4080 Super.
+## Overview
 
-**Reported use:** more than 100 lecture/research documents tested; top-5 retrieval recall improved from **64% to 86%** after hybrid retrieval and reranking; more than 200 outreach/follow-up emails assisted through a user-approved Gmail workflow. These are owner-reported observations. The private corpus, original relevance labels, and run logs are not included, so this repository does not independently verify those figures.
+I built this workspace to work with local documents, get coding assistance in VS Code, and review tool actions before execution. It runs on a Windows 11 workstation with WSL2 and an RTX 4080 Super with 16 GB VRAM.
 
-This repository contains deployment configuration, setup notes, and a synthetic evaluation example. The language models, document parser, retrieval implementation, and storage engine come from the credited upstream projects.
+My work covers the integration, model configuration, retrieval evaluation, and approval-based workflows. OpenWebUI, Ollama, Docling, and the other upstream projects provide the models, parsing, retrieval, and storage components.
+
+The public repository includes deployment configuration, setup documentation, a synthetic document corpus, and an offline retrieval scorer. Private documents and the Gmail connector are excluded.
 
 ## What it does
 
-- Keeps inference and configured document processing on local hardware, reducing the need to send document text to hosted inference services.
-- Uses a smaller model for routine work and a larger model for reasoning and debugging.
-- Combines semantic search with keyword search, then reranks candidate passages before answering with source context.
-- Connects VS Code through Continue and describes an approval gate for external tool actions.
-- Provides sanitized configuration and a runnable retrieval scoring example without private documents or credentials.
+- **Local inference:** document Q&A and coding assistance without sending prompts to a hosted inference provider.
+- **Two-model workflow:** Qwen for routine work; GPT-OSS for reasoning and debugging.
+- **Document retrieval:** semantic and keyword search with BGE reranking and source references.
+- **Editor integration:** Continue connects VS Code to the local model server.
+- **Evaluation:** synthetic relevance labels, example rankings, and a document-level recall scorer.
 
-Start with the [Windows/WSL setup](docs/setup-windows-wsl.md), [architecture](docs/architecture.md), or [evaluation notes](docs/evaluation.md).
+[Setup](docs/setup-windows-wsl.md) | [Architecture](docs/architecture.md) | [Evaluation](docs/evaluation.md) | [Security](docs/security-and-privacy.md)
 
 ## Architecture
 
@@ -54,7 +56,7 @@ flowchart LR
     Keywords --> Hybrid
     Hybrid --> Rank[BGE reranking]
     Rank --> UI
-    UI --> Ollama[Ollama in WSL2]
+    UI --> Ollama[Local Ollama server]
     IDE --> Ollama
     Ollama --> Models[Qwen 3.5 9B or GPT-OSS 20B]
     UI -. Optional tool request .-> Gate[Human approval gate]
@@ -62,7 +64,9 @@ flowchart LR
     MCP -. External service .-> Gmail[Gmail demo account]
 ```
 
-The diagram describes the full workspace. The supplied Compose file starts OpenWebUI only; RAG needs the [additional configuration](docs/setup-windows-wsl.md#configure-document-retrieval). The Gmail integration is a documented private workflow, with no executable connector or approval gate shipped here.
+The diagram covers the full workspace. Compose starts OpenWebUI; Ollama and optional Docling services run separately. Retrieval settings are documented in the [setup guide](docs/setup-windows-wsl.md#configure-document-retrieval). The MCP/Gmail path represents a separate private integration; its connector and approval gate are not part of the public runtime.
+
+Ollama can run on Windows or in WSL2. Each installation has its own model store, so chat and embedding endpoints must point to the intended instance. The setup guide uses WSL2 as the reference deployment.
 
 ## Technology stack
 
@@ -72,7 +76,7 @@ The diagram describes the full workspace. The supplied Compose file starts OpenW
 | OpenWebUI | Chat, document ingestion, retrieval integration, persistent state |
 | Ollama | Local model serving and model aliases |
 | Qwen 3.5 9B / GPT-OSS 20B | Generation and tool-call proposals |
-| Docling | Document parsing and OCR; existing setup described as "v4" (exact release unrecorded) |
+| Docling | Document parsing and OCR |
 | Nomic / BGE | Embeddings / reranking |
 | Continue.dev | Local coding assistance in VS Code |
 | Model Context Protocol (MCP) | Optional tool integration with explicit action approval |
@@ -84,48 +88,60 @@ The diagram describes the full workspace. The supplied Compose file starts OpenW
 | `qwen3.5-32k` | `qwen3.5:9b` | 32,768 tokens | Faster chat, document Q&A, routine coding |
 | `gpt-oss-16k` | `gpt-oss:20b` | 16,384 tokens | Reasoning, debugging, harder edits |
 
-These are workflow choices, not published speed or quality benchmarks. Both aliases and context settings were confirmed on the existing WSL Ollama installation. Clients can override context settings; keep OpenWebUI and Continue aligned with the Modelfiles.
+The aliases configure context windows on existing models; they do not retrain them. Both settings were checked against the local Ollama installation. Client-level context settings can override the Modelfiles. The intended uses above describe the workflow, rather than a model benchmark.
 
-The installed quantized base models occupy roughly 6.6 GB and 13 GB on disk. Disk size is **not** peak VRAM use: context caches, runtime buffers, embeddings, and OCR also need resources. Run one generation model at a time, limit concurrent requests, and check `ollama ps` and `nvidia-smi`. Reduce context if needed; full GPU residency at the configured maximum is not guaranteed. See [memory planning](docs/architecture.md#memory-and-model-lifecycle) and the [Ollama FAQ](https://docs.ollama.com/faq).
+The quantized base models occupy roughly 6.6 GB and 13 GB on disk. Runtime memory also includes context caches and buffers, so those sizes are not peak VRAM measurements. The 16 GB GPU budget favors one active generation model and limited concurrency; larger contexts may require CPU offload. [Memory planning](docs/architecture.md#memory-and-model-lifecycle) covers model switching and inspection with `ollama ps` and `nvidia-smi`.
 
 ## RAG pipeline
 
 Retrieval-augmented generation (RAG) supplies relevant source passages to a model at question time.
 
-1. Parse local documents with Docling, using OCR for scanned pages.
-2. Split the extracted text into chunks and retain document/page metadata.
-3. Create Nomic embeddings: numerical representations used for semantic matching.
-4. Combine semantic matches with keyword matches in hybrid retrieval.
-5. Use BGE to score query/passage pairs again and select the best context.
-6. Ask the selected local model to answer using that context; inspect cited passages.
+1. **Extraction:** Docling parses documents and uses OCR for scanned pages.
+2. **Chunking:** extracted text is split into passages with source metadata.
+3. **Embedding:** Nomic represents passages numerically for semantic search.
+4. **Hybrid retrieval:** semantic matches are combined with keyword matches.
+5. **Reranking:** BGE scores the candidate passages against the question.
+6. **Generation:** the selected local model receives the question and retrieved context, then produces an answer with source references.
 
-OpenWebUI supplies the retrieval and storage integration. [Upstream RAG documentation](https://docs.openwebui.com/features/chat-conversations/rag/) explains its behavior; this project does not implement a custom vector database.
+OpenWebUI supplies the retrieval and storage integration. The [upstream RAG documentation](https://docs.openwebui.com/features/chat-conversations/rag/) describes its implementation. Retrieval augments the prompt at question time; it does not train the model on the documents.
 
 ## Retrieval evaluation
 
-| Configuration | Reported top-5 recall |
+The system has been tested on more than 100 lecture/research documents. Reported local results:
+
+| Configuration | Top-5 recall |
 | --- | ---: |
-| Original baseline; exact settings unavailable | 64% |
+| Original baseline | 64% |
 | Hybrid retrieval + BGE reranking | 86% |
 
-That is a reported **22 percentage-point** improvement. Recall asks how many labeled relevant documents appeared in the retrieved set. It does not measure answer correctness. The original query count, aggregation method, and baseline settings are unrecorded here; the figures are not reproducible from the public examples.
+The reported improvement is **22 percentage points**. Recall measures the fraction of labeled relevant documents found in the retrieved set, separately from answer correctness.
 
-The [evaluation protocol](docs/evaluation.md) defines an explicit document-level metric for new runs. [Synthetic queries](evaluation/example_queries.json), [illustrative rankings](evaluation/predictions.example.json), and a [standard-library scorer](evaluation/score.py) demonstrate the format:
+The original corpus, query set, relevance labels, run logs, and exact baseline configuration are not published. The historical scoring details are incomplete, so these figures cannot be reproduced from the public example. The [evaluation notes](docs/evaluation.md) document those limits and define a protocol for new runs.
+
+The public example includes [synthetic queries](evaluation/example_queries.json), [illustrative rankings](evaluation/predictions.example.json), and a [Python standard-library scorer](evaluation/score.py):
 
 ```powershell
 python evaluation/score.py --queries evaluation/example_queries.json --predictions evaluation/predictions.example.json --output evaluation/runs/example.csv
 ```
 
-This scores supplied rankings; it does not run retrieval or recreate the reported experiment. See [evaluation instructions](evaluation/README.md).
+This command scores supplied rankings. The example rankings are handwritten and labeled `illustrative`; they are separate from the reported private experiment. Schema and scoring details are in [evaluation/README.md](evaluation/README.md).
 
 ## Hardware
 
-The reference system uses an NVIDIA RTX 4080 Super with 16 GB VRAM. A practical starting recommendation is 32 GB system RAM and 50 GB free SSD space for models, container images, caches, and small datasets; these are planning estimates rather than measured minimums. CPU fallback or smaller models can work on other hardware, with different performance.
+| Resource | Reference or planning target |
+| --- | --- |
+| GPU | NVIDIA RTX 4080 Super, 16 GB VRAM |
+| Operating system | Windows 11 with WSL2 |
+| System RAM | 32 GB recommended for planning |
+| Free SSD space | About 50 GB for models, images, caches, and a small corpus |
+
+RAM and disk figures are estimates, not measured minimum requirements. Smaller models and CPU offload allow other hardware configurations with different performance.
 
 ## Quick start
 
-1. Install WSL2 with Ubuntu, the Windows NVIDIA driver with WSL CUDA support, and Docker Desktop with its WSL2 backend. Use the [setup guide](docs/setup-windows-wsl.md) for commands and networking checks.
-2. Install Ollama **inside WSL**, then run the following in a WSL terminal at the repository root:
+Prerequisites: WSL2 with Ubuntu, a Windows NVIDIA driver with WSL CUDA support, Docker Desktop using the WSL2 backend, and Ollama installed inside WSL. Installation and networking details are in the [setup guide](docs/setup-windows-wsl.md).
+
+**Models** — in a WSL terminal at the repository root:
 
 ```bash
 ollama pull qwen3.5:9b
@@ -137,47 +153,45 @@ ollama show qwen3.5-32k --parameters
 ollama show gpt-oss-16k --parameters
 ```
 
-3. In PowerShell at the repository root, copy `.env.example` to `.env`. Set `WEBUI_SECRET_KEY` to a private random value using the [PowerShell generation steps](docs/setup-windows-wsl.md#start-openwebui). No secret is provided in this repository.
-4. Review `OPENWEBUI_IMAGE`: `main` is a documented, mutable fallback because no stable release tag was recorded. Select and record a tested upstream release tag or image digest before relying on repeatable deployments.
+**OpenWebUI** — `.env.example` provides the environment template. A private `.env` requires a random `WEBUI_SECRET_KEY`; [PowerShell setup steps](docs/setup-windows-wsl.md#start-openwebui) generate it without overwriting an existing configuration.
+
+`OPENWEBUI_IMAGE` defaults to the mutable `main` tag. A tested release tag or digest is needed for a repeatable deployment; this repository does not yet pin one.
+
+From PowerShell at the repository root, after configuring `.env`:
 
 ```powershell
 docker compose config --quiet
 docker compose up -d
 ```
 
-5. Open [localhost:3000](http://localhost:3000), create the initial administrator account, and verify sign-up is disabled afterward. Confirm the Ollama connection resolves to the WSL server and both aliases appear.
-6. Follow [RAG setup](docs/setup-windows-wsl.md#configure-document-retrieval) to select Nomic, hybrid search, BGE, and optional Docling. Upload only the supplied synthetic corpus for a public demo.
+The interface is available at [localhost:3000](http://localhost:3000). Initial setup creates an administrator account; authentication remains enabled and new sign-ups should be disabled after setup. The Ollama connection must resolve to the instance containing the model aliases.
 
-The named volume persists accounts, chats, uploads, and indexes. Authentication stays enabled, and the published port binds to loopback. No existing containers need to be replaced to inspect this configuration.
+Nomic embeddings, hybrid search, BGE reranking, and optional Docling extraction require the [RAG configuration](docs/setup-windows-wsl.md#configure-document-retrieval). The [synthetic corpus](evaluation/corpus/) provides the documents used in the demo.
+
+The named Docker volume persists accounts, chats, uploads, and indexes. The UI port binds to loopback.
 
 ## Continue in VS Code
 
-Install Continue and open its local YAML configuration. Merge the models from [continue.example.yaml](config/continue.example.yaml). Both entries use `provider: ollama`, roles `chat`, `edit`, `apply`, and `capabilities: [tool_use]`. Set `apiBase` to the same reachable WSL server used by OpenWebUI, taking the VS Code extension's execution environment into account.
+The [Continue configuration example](config/continue.example.yaml) defines both aliases with `provider: ollama`, roles `chat`, `edit`, `apply`, and `capabilities: [tool_use]`.
 
-The declaration enables tool support in the client; it does not grant permissions or guarantee every tool call succeeds. See [Continue's configuration reference](https://docs.continue.dev/reference).
+These entries belong in Continue's active local YAML configuration. `apiBase` identifies the model server reachable from the VS Code extension's execution environment. Tool capability is separate from permission to execute an action. Field definitions are in [Continue's configuration reference](https://docs.continue.dev/reference).
 
 ## Security and privacy
 
-Local inference reduces external data transfer. Model downloads, extensions, optional cloud features, and Gmail can still create network traffic. Local processing does not automatically provide regulatory compliance. This is not a clinical decision system, and no HIPAA compliance claim is made.
+Local inference reduces the need to send prompts and document text to hosted model providers. Downloads, extensions, optional cloud features, and external tools can still generate network traffic. Local processing does not establish regulatory compliance; this project is not a clinical decision system and makes no HIPAA compliance claim.
 
-The private Gmail workflow requires a person to inspect and approve each proposed action before execution. More than 200 assisted emails is an owner-reported usage count, not autonomous sends or a success rate. The public configuration contains no Gmail connector, OAuth files, or MCP credentials. [Security notes](docs/security-and-privacy.md) describe the intended enforcement boundary and demo requirements.
+The separate Gmail workflow requires human review of proposed actions before execution. Its reported usage is more than 200 assisted outreach/follow-up emails. That count describes assisted messages, not autonomous sends or a measured success rate. The connector, OAuth files, and MCP credentials are excluded from the public runtime.
 
-Use synthetic or appropriately licensed public documents and a separate demo account. Do not expose port 3000 publicly without authentication and appropriate network controls.
-
-## Screenshots
-
-The two demo videos and their clickable previews are at the top of this README.
-
-Screenshot placeholders and capture guidance live in [assets/README.md](assets/README.md). Add `workspace-overview.png`, `rag-citations.png`, `continue-local-models.png`, `tool-approval.png`, and `gpu-memory.png` after redacting account data and private content. No screenshots or benchmark graphics are fabricated here.
+MCP defines tool communication; approval must be enforced by the client or executor. The supplied configuration keeps OpenWebUI authenticated and bound to localhost. Public access requires appropriate authentication and network controls. Public demos use synthetic or appropriately licensed documents and a separate account. Further details are in [security and privacy](docs/security-and-privacy.md).
 
 ## Limitations
 
-- Original evaluation evidence and exact historical retrieval settings are private or unavailable.
-- OCR, retrieval, citations, and generated answers can be wrong; source verification remains necessary.
-- A 16 GB GPU limits context, concurrency, and simultaneous model residency.
-- The full RAG configuration needs manual setup; the minimal Compose file starts the UI only.
-- Docling "v4" is not a verified package pin. Upstream versions and UI settings can change.
-- MCP/Gmail orchestration is documented but excluded from the public runtime.
+- Private evaluation evidence and incomplete historical settings limit reproducibility of the reported results.
+- OCR errors, missed passages, and unsupported generated claims still require source review.
+- A 16 GB GPU limits context size, concurrency, and simultaneous model residency.
+- Compose starts the UI; the full retrieval pipeline needs additional configuration.
+- OpenWebUI and Docling versions are not pinned, so configuration and API compatibility can change.
+- The private MCP/Gmail connector and approval implementation are not included.
 
 ## Roadmap
 
@@ -188,6 +202,6 @@ Screenshot placeholders and capture guidance live in [assets/README.md](assets/R
 
 ## Credits and license
 
-Built on [OpenWebUI](https://github.com/open-webui/open-webui), [Ollama](https://github.com/ollama/ollama), [Docling](https://github.com/docling-project/docling), [Qwen](https://github.com/QwenLM/Qwen3.5), [GPT-OSS](https://github.com/openai/gpt-oss), [Nomic embeddings](https://ollama.com/library/nomic-embed-text), [BGE / FlagEmbedding](https://github.com/FlagOpen/FlagEmbedding), [Continue](https://github.com/continuedev/continue), and [MCP](https://modelcontextprotocol.io/). Their authors provide the underlying models and software.
+Built with [OpenWebUI](https://github.com/open-webui/open-webui), [Ollama](https://github.com/ollama/ollama), [Docling](https://github.com/docling-project/docling), [Qwen](https://github.com/QwenLM/Qwen3.5), [GPT-OSS](https://github.com/openai/gpt-oss), [Nomic embeddings](https://ollama.com/library/nomic-embed-text), [BGE / FlagEmbedding](https://github.com/FlagOpen/FlagEmbedding), [Continue](https://github.com/continuedev/continue), and [MCP](https://modelcontextprotocol.io/).
 
-Repository-authored configuration, documentation, and evaluation utilities use the existing [Apache License 2.0](LICENSE). Third-party projects and model weights retain their own licenses and notices; this repository does not redistribute their source code or weights.
+Original configuration, documentation, and evaluation utilities are covered by [Apache License 2.0](LICENSE). Upstream software and model weights retain their respective licenses and notices. Their source code and weights are not redistributed here.
