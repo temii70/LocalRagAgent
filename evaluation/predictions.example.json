@@ -1,0 +1,19 @@
+{
+  "evidence_type": "illustrative",
+  "run_id": "handwritten-format-demo",
+  "notes": "Handwritten rankings for schema demonstration, not output from a retrieval run.",
+  "rankings": [
+    {
+      "query_id": "demo-01",
+      "retrieved_document_ids": ["storage-policy", "access-policy", "incident-response", "gpu-budget", "retrieval-guide", "backup-policy"]
+    },
+    {
+      "query_id": "demo-02",
+      "retrieved_document_ids": ["access-policy", "incident-response", "storage-policy", "backup-policy", "gpu-budget", "retrieval-guide"]
+    },
+    {
+      "query_id": "demo-03",
+      "retrieved_document_ids": ["gpu-budget", "retrieval-guide", "storage-policy", "backup-policy", "access-policy", "incident-response"]
+    }
+  ]
+}
