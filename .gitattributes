@@ -1,0 +1,11 @@
+# Preserve checksum-bearing benchmark files across Windows and Linux checkouts.
+evaluation/*.py text eol=lf
+evaluation/*.json text eol=lf
+evaluation/*.txt text eol=lf
+evaluation/public/** text eol=lf
+evaluation/results/** text eol=lf
+config/repository-metadata.json text eol=lf
+
+*.mp4 binary
+*.gif binary
+*.png binary

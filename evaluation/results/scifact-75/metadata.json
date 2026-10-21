@@ -1,0 +1,113 @@
+{
+  "evidence_type": "measured",
+  "completed_at_utc": "2026-10-21T23:53:51.890655+00:00",
+  "dataset_manifest_sha256": "f8182af603e56df3f449cfdd2f46796bc08d39d58226c1f557c82bd4aee9bee4",
+  "runner_sha256": "e4f6f12b7220f9d0efc3e7feb3f4b9e1ac4c47fe737f48963ce0a4c5e028926f",
+  "scorer_sha256": "2874b59b9917405ac56d8d0f20f9b97713dd2963c5ba2ca9bdeca8e030cb989a",
+  "config_sha256": "c39cb9e355ac6332e353876dc37cf6c57f89c313e8049203894520cf7c548644",
+  "config": {
+    "embedding_model": "nomic-embed-text:latest",
+    "embedding_digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+    "document_prefix": "search_document: ",
+    "query_prefix": "search_query: ",
+    "embedding_batch_size": 32,
+    "embedding_truncate": true,
+    "candidate_count": 20,
+    "rrf_constant": 60,
+    "bm25_k1": 1.5,
+    "bm25_b": 0.75,
+    "reranker_model": "BAAI/bge-reranker-v2-m3",
+    "reranker_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "reranker_max_length": 512,
+    "reranker_batch_size": 8,
+    "reranker_device": "cuda",
+    "reranker_dtype": "float32",
+    "reranker_backend": "transformers",
+    "cpu_threads": 4,
+    "k": 5,
+    "bootstrap_seed": 42,
+    "bootstrap_resamples": 10000
+  },
+  "runtime": {
+    "python": "3.12.12",
+    "platform": "Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.34",
+    "ollama_version": "0.40.3",
+    "container_image": "quay.io/docling-project/docling-serve-cu128@sha256:5ba5427efe6f024f435c6ad5fef7c828e47aaf5b1fe1e7ec5af952ac580f7b8e",
+    "embedding_placement_bytes": {
+      "size": 323150151,
+      "size_vram": 323150151
+    },
+    "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+    "packages": {
+      "numpy": "2.4.2",
+      "torch": "2.10.0+cu128",
+      "transformers": "4.57.6",
+      "rank-bm25": "0.2.2",
+      "huggingface-hub": "0.36.2",
+      "tokenizers": "0.22.2",
+      "safetensors": "0.7.0"
+    }
+  },
+  "embedding_model": {
+    "name": "nomic-embed-text:latest",
+    "digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "nomic-bert",
+      "families": [
+        "nomic-bert"
+      ],
+      "parameter_size": "137M",
+      "quantization_level": "F16",
+      "context_length": 2048,
+      "embedding_length": 768,
+      "runner": "ggml"
+    },
+    "model_info": {
+      "general.architecture": "nomic-bert",
+      "general.file_type": 1,
+      "general.parameter_count": 136727040,
+      "nomic-bert.attention.causal": false,
+      "nomic-bert.attention.head_count": 12,
+      "nomic-bert.attention.layer_norm_epsilon": 1e-12,
+      "nomic-bert.block_count": 12,
+      "nomic-bert.context_length": 2048,
+      "nomic-bert.embedding_length": 768,
+      "nomic-bert.feed_forward_length": 3072,
+      "nomic-bert.pooling_type": 1,
+      "nomic-bert.rope.freq_base": 1000,
+      "tokenizer.ggml.bos_token_id": 101,
+      "tokenizer.ggml.cls_token_id": 101,
+      "tokenizer.ggml.eos_token_id": 102,
+      "tokenizer.ggml.mask_token_id": 103,
+      "tokenizer.ggml.model": "bert",
+      "tokenizer.ggml.padding_token_id": 0,
+      "tokenizer.ggml.scores": [],
+      "tokenizer.ggml.seperator_token_id": 102,
+      "tokenizer.ggml.token_type": [],
+      "tokenizer.ggml.token_type_count": 2,
+      "tokenizer.ggml.tokens": [],
+      "tokenizer.ggml.unknown_token_id": 100
+    },
+    "dimensions": 768
+  },
+  "embedding_cache": {
+    "documents_reused": true,
+    "queries_reused": true
+  },
+  "embedding_phase_seconds": 0.13003508999827318,
+  "total_seconds": 30.707961898995563,
+  "paired_bootstrap_hybrid_bge_minus_dense": {
+    "mean_delta": -0.021111111111111112,
+    "percentile_95_ci": [
+      -0.09888888888888889,
+      0.056666666666666664
+    ],
+    "seed": 42,
+    "resamples": 10000
+  },
+  "metric_unit": "distinct abstract/document; macro recall@5; positive published qrels; unjudged documents treated as nonrelevant",
+  "timing_scope": "Ranking only; excludes embedding, indexing, model loading, answer generation, OCR, UI, and network setup; not an end-to-end latency benchmark",
+  "scope": "75-claim fixed sample of official SciFact test; full corpus; standalone retrieval harness, not an OpenWebUI end-to-end evaluation"
+}

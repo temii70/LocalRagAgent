@@ -1,0 +1,611 @@
+[
+  {
+    "query_id": "13",
+    "query": "5% of perinatal mortality is due to low birth weight.",
+    "relevant_document_ids": [
+      "1606628"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "56",
+    "query": "APOE4 expression in iPSC-derived neurons increases AlphaBeta production and tau phosphorylation causing GABA neuron degeneration.",
+    "relevant_document_ids": [
+      "4709641"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "57",
+    "query": "APOE4 expression in iPSC-derived neurons increases AlphaBeta production and tau phosphorylation, delaying GABA neuron degeneration.",
+    "relevant_document_ids": [
+      "4709641"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "72",
+    "query": "Activator-inhibitor pairs are provided dorsally by Admpchordin.",
+    "relevant_document_ids": [
+      "6076903"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "75",
+    "query": "Active H. pylori urease has a polymeric structure that compromises two subunits, UreA and UreB.",
+    "relevant_document_ids": [
+      "4387784"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "118",
+    "query": "Antibiotic induced alterations in the gut microbiome reduce resistance against Clostridium difficile",
+    "relevant_document_ids": [
+      "6372244"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "124",
+    "query": "Antiretroviral therapy reduces rates of tuberculosis across a broad range of CD4 strata.",
+    "relevant_document_ids": [
+      "4883040"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "132",
+    "query": "Aspirin inhibits the production of PGE2.",
+    "relevant_document_ids": [
+      "7975937"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "143",
+    "query": "Autologous transplantation of mesenchymal stem cells causes fewer opportunistic infections than induction therapy with anti-interleukin-2 receptor antibodies.",
+    "relevant_document_ids": [
+      "10582939"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "148",
+    "query": "Autophagy declines in aged organisms.",
+    "relevant_document_ids": [
+      "1084345"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "163",
+    "query": "Bariatric surgery has a positive impact on mental health.",
+    "relevant_document_ids": [
+      "18872233"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "183",
+    "query": "Bone marrow cells contribute to adult macrophage compartments.",
+    "relevant_document_ids": [
+      "12827098"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "212",
+    "query": "CR is associated with higher methylation age.",
+    "relevant_document_ids": [
+      "22038539"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "217",
+    "query": "CX3CR1 on the Th2 cells promotes T cell survival",
+    "relevant_document_ids": [
+      "21366394"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "219",
+    "query": "CX3CR1 on the Th2 cells suppresses airway inflammation.",
+    "relevant_document_ids": [
+      "21366394"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "232",
+    "query": "Cataract and trachoma are the primary cause of blindness in Southern Sudan.",
+    "relevant_document_ids": [
+      "10536636"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "233",
+    "query": "Cell autonomous sex determination in somatic cells does not occur in Galliformes.",
+    "relevant_document_ids": [
+      "4388470"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "248",
+    "query": "Chenodeosycholic acid treatment increases whole-body energy expenditure.",
+    "relevant_document_ids": [
+      "1568684"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "275",
+    "query": "Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors is effective at treating KRAS mutant tumors.",
+    "relevant_document_ids": [
+      "4961038",
+      "14241418",
+      "14819804"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "314",
+    "query": "Deamination of cytidine to uridine on the minus strand of viral DNA results in catastrophic G-to-A mutations in the viral genome.",
+    "relevant_document_ids": [
+      "4347374"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "380",
+    "query": "Enhanced early production of inflammatory chemokines improves viral control in the lung.",
+    "relevant_document_ids": [
+      "19005293"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "385",
+    "query": "Epigenetic modulating agents (EMAs) modulate antitumor immune response in a cancer model system.",
+    "relevant_document_ids": [
+      "9767444",
+      "9955779"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "388",
+    "query": "Ethanol stress decreases the expression of IBP in bacteria.",
+    "relevant_document_ids": [
+      "1148122"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "415",
+    "query": "Female carriers of the Apolipoprotein E4 (APOE4) allele have increased risk for dementia.",
+    "relevant_document_ids": [
+      "6309659"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "491",
+    "query": "HNF4A mutations can cause diabetes in mutant carriers by the age of 14 years",
+    "relevant_document_ids": [
+      "56893404"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "507",
+    "query": "Helminths interfere with immune system control of macrophages activated by IL-4 favor Mycobacterium tuberculosis replication.",
+    "relevant_document_ids": [
+      "30774694"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "521",
+    "query": "High-sensitivity cardiac troponin T (HSCT-T) dosage may not be diagnostic if the onset of symptoms occurs less than 3 hours before acute myocardial injury (AMI).",
+    "relevant_document_ids": [
+      "34873974"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "525",
+    "query": "Histone demethylase recruitment and a transient decrease in histone methylation is necessary for ligand-dependent induction of transcription by nuclear receptors.",
+    "relevant_document_ids": [
+      "13639330"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "528",
+    "query": "Human T-lymphotropic virus type-I-associated myelopathy / tropical spastic paraparesis (HAM/TSP) patients produce Immunoglobulin G (IgG) antibodies which cross-react with an immunodominant epitope in Tax.",
+    "relevant_document_ids": [
+      "5476778"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "532",
+    "query": "Hyperfibrinogenemia decreases rates of femoropopliteal bypass thrombosis.",
+    "relevant_document_ids": [
+      "12991445"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "533",
+    "query": "Hyperfibrinogenemia increases rates of femoropopliteal bypass thrombosis.",
+    "relevant_document_ids": [
+      "12991445"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "536",
+    "query": "Hypocretin neurones induce panicprone state in rats.",
+    "relevant_document_ids": [
+      "16056514"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "540",
+    "query": "Hypothalamic glutamate neurotransmission is crucial to energy balance.",
+    "relevant_document_ids": [
+      "11886686",
+      "25007443"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "544",
+    "query": "IFIT1 restricts viral replication by sequestrating mis-capped viral RNAs.",
+    "relevant_document_ids": [
+      "24221369"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "551",
+    "query": "ITAM phosphorylation prevents the transfer of the T cell receptor (TCR) signal from the echo-domain to the cytoplasmic tail of the T cell receptor (TCR).",
+    "relevant_document_ids": [
+      "33499189"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "577",
+    "query": "In mice, P. chabaudi parasites are able to proliferate faster early in infection when inoculated at lower numbers than when inoculated at high numbers.",
+    "relevant_document_ids": [
+      "5289038"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "628",
+    "query": "Infection of human T-cell lymphotropic virus type 1 is most frequent in individuals of African origin.",
+    "relevant_document_ids": [
+      "24512064"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "636",
+    "query": "Inositol lipid 3-phosphatase PTEN converts Ptdlns(3,4)P 2 into phosphatidylinositol 4-phosphate.",
+    "relevant_document_ids": [
+      "24294572"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "637",
+    "query": "Input from  mental and physical health care professionals is effective at decreasing homelessness.",
+    "relevant_document_ids": [
+      "25649714"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "641",
+    "query": "Insomnia can be effectively treated with cognitive behavioral therapy.",
+    "relevant_document_ids": [
+      "5912283",
+      "31554917"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "649",
+    "query": "Integrating classroom-based collaborative learning with Web-based collaborative learning leads to subpar class performance",
+    "relevant_document_ids": [
+      "12789595"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "660",
+    "query": "Ivermectin is used to treat onchocerciasis.",
+    "relevant_document_ids": [
+      "1215116"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "693",
+    "query": "Leuko-reduced blood reduces infectious complications in red blood cell transfusion.",
+    "relevant_document_ids": [
+      "24088502"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "702",
+    "query": "Localization of PIN1 in the roots of Arabidopsis does not require VPS9a",
+    "relevant_document_ids": [
+      "4350400"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "744",
+    "query": "Macropinocytosis contributes to a cell's supply of amino acids via the intracellular uptake of protein.",
+    "relevant_document_ids": [
+      "8460275"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "775",
+    "query": "Mice defective for deoxyribonucleic acid (DNA) polymerase I (polI) reveal increased sensitivity to ionizing radiation (IR).",
+    "relevant_document_ids": [
+      "32275758"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "800",
+    "query": "Modifying the epigenome in the brain affects the normal human aging process by affecting certain genes related to neurogenesis.",
+    "relevant_document_ids": [
+      "22543403"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "808",
+    "query": "Most termination events in Okazaki fragments are sequence specific.",
+    "relevant_document_ids": [
+      "36606083"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "814",
+    "query": "Mutations in G-Beta protein GNB2 are present in many cancers, resulting in loss of interaction with G-alpha subunits and concomitant activation of AKT pathway.",
+    "relevant_document_ids": [
+      "33387953"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "831",
+    "query": "NF2 (Merlin) prevents phosphorylation and subsequent cytoplasmic sequestration of YAP in Drosophila.",
+    "relevant_document_ids": [
+      "1897324"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "834",
+    "query": "NOX2-independent pathways can generate peroxynitrite by reacting with nitrogen intermediates.",
+    "relevant_document_ids": [
+      "5483793"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "839",
+    "query": "Nanoparticles can be targeted against specific cell types by incorporating aptamers into lipid nanoparticles.",
+    "relevant_document_ids": [
+      "1469751"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "845",
+    "query": "Neutrophil extracellular traps (NETs) are released by ANCA-stimulated neutrophils.",
+    "relevant_document_ids": [
+      "17741440"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "859",
+    "query": "Normal expression of RUNX1 has tumor-promoting effects.",
+    "relevant_document_ids": [
+      "1982286"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "880",
+    "query": "Occupancy of ribosomes by IncRNAs mirror 5 0-UTRs",
+    "relevant_document_ids": [
+      "8426046"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "882",
+    "query": "Omnivores produce less trimethylamine N-oxide from dietary I-carnitine than vegetarians.",
+    "relevant_document_ids": [
+      "14803797"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "921",
+    "query": "Participating in six months of physical activity improves cognitive functioning.",
+    "relevant_document_ids": [
+      "1642727"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "956",
+    "query": "Pleiotropic coupling of GLP-1R to intracellular effectors promotes distinct profiles of cellular signaling.",
+    "relevant_document_ids": [
+      "12956194"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1012",
+    "query": "Radioiodine treatment of non-toxic multinodular goitre reduces thyroid volume.",
+    "relevant_document_ids": [
+      "9745001"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1019",
+    "query": "Rapid phosphotransfer rates govern fidelity in two component systems",
+    "relevant_document_ids": [
+      "11603066"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1104",
+    "query": "Stroke patients with prior use of direct oral anticoagulants have a lower risk of in-hospital mortality than stroke patients with prior use of warfarin.",
+    "relevant_document_ids": [
+      "3898784"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1121",
+    "query": "Synaptic activity enhances local release of brain derived neurotrophic factor from postsynaptic dendrites.",
+    "relevant_document_ids": [
+      "4456756"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1132",
+    "query": "TCR/CD3 microdomains are a required to induce the immunologic synapse to activate T cells.",
+    "relevant_document_ids": [
+      "9283422",
+      "33499189"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1137",
+    "query": "TNFAIP3 is a tumor suppressor in glioblastoma.",
+    "relevant_document_ids": [
+      "33370"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1140",
+    "query": "Taking 400mg of α-tocopheryl acetate helps to prevent prostate cancer.",
+    "relevant_document_ids": [
+      "12009265"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1213",
+    "query": "The deregulated and prolonged activation of monocytes has deleterious effects in inflammatory diseases.",
+    "relevant_document_ids": [
+      "14407673"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1225",
+    "query": "The locus rs647161 is associated with colorectal carcinoma.",
+    "relevant_document_ids": [
+      "9650982"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1280",
+    "query": "The ureABIEFGH gene cluster encodes urease maturation proteins : UreD/UreH, UreE, UreF, and UreG.",
+    "relevant_document_ids": [
+      "4387784"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1281",
+    "query": "The ureABIEFGH gene cluster is induced by nickel (II) ion.",
+    "relevant_document_ids": [
+      "4387784"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1303",
+    "query": "Tirasemtiv has no effect on fast-twitch muscle.",
+    "relevant_document_ids": [
+      "12631697"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1320",
+    "query": "Transplanted human glial progenitor cells are incapable of forming a neural network with host animals' neurons.",
+    "relevant_document_ids": [
+      "16284655"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1336",
+    "query": "UCB T cells reduce TCR diversity after transplantation.",
+    "relevant_document_ids": [
+      "27910499"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1339",
+    "query": "Ultrasound guidance significantly raises the number of traumatic procedures when attempting needle insertion.",
+    "relevant_document_ids": [
+      "15482274"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1359",
+    "query": "Varenicline monotherapy is more effective after 12 weeks of treatment compared to combination nicotine replacement therapies with varenicline or bupropion.",
+    "relevant_document_ids": [
+      "11614737"
+    ],
+    "source_split": "BEIR SciFact test"
+  },
+  {
+    "query_id": "1379",
+    "query": "Women with a higher birth weight are more likely to develop breast cancer later in life.",
+    "relevant_document_ids": [
+      "16322674",
+      "17450673",
+      "23557241",
+      "27123743"
+    ],
+    "source_split": "BEIR SciFact test"
+  }
+]

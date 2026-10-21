@@ -1,0 +1,23 @@
+{
+  "embedding_model": "nomic-embed-text:latest",
+  "embedding_digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+  "document_prefix": "search_document: ",
+  "query_prefix": "search_query: ",
+  "embedding_batch_size": 32,
+  "embedding_truncate": true,
+  "candidate_count": 20,
+  "rrf_constant": 60,
+  "bm25_k1": 1.5,
+  "bm25_b": 0.75,
+  "reranker_model": "BAAI/bge-reranker-v2-m3",
+  "reranker_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+  "reranker_max_length": 512,
+  "reranker_batch_size": 8,
+  "reranker_device": "cuda",
+  "reranker_dtype": "float32",
+  "reranker_backend": "transformers",
+  "cpu_threads": 4,
+  "k": 5,
+  "bootstrap_seed": 42,
+  "bootstrap_resamples": 10000
+}

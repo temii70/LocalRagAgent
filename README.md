@@ -10,7 +10,7 @@ Qwen answers questions from the Demo Workspace documents with source citations.
 
 [![Animated recording of Qwen answering questions using synthetic document sources](assets/demo/document-qa.gif)](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/assets/demo/document-qa.gif)
 
-[Open full-size animation](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/assets/demo/document-qa.gif) | [Full-resolution MP4](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/01-document-qa.mp4)
+[Open full-size animation](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/assets/demo/document-qa.gif) | [Full-resolution MP4](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/assets/demo/01-document-qa.mp4)
 
 ### Local coding with GPT-OSS
 
@@ -141,7 +141,7 @@ RAM and disk figures are estimates, not measured minimum requirements. Smaller m
 
 Prerequisites: WSL2 with Ubuntu, a Windows NVIDIA driver with WSL CUDA support, Docker Desktop using the WSL2 backend, and Ollama installed inside WSL. Installation and networking details are in the [setup guide](docs/setup-windows-wsl.md).
 
-**Models** — in a WSL terminal at the repository root:
+**Models** â€” in a WSL terminal at the repository root:
 
 ```bash
 ollama pull qwen3.5:9b
@@ -153,7 +153,7 @@ ollama show qwen3.5-32k --parameters
 ollama show gpt-oss-16k --parameters
 ```
 
-**OpenWebUI** — `.env.example` provides the environment template. A private `.env` requires a random `WEBUI_SECRET_KEY`; [PowerShell setup steps](docs/setup-windows-wsl.md#start-openwebui) generate it without overwriting an existing configuration.
+**OpenWebUI** â€” `.env.example` provides the environment template. A private `.env` requires a random `WEBUI_SECRET_KEY`; [PowerShell setup steps](docs/setup-windows-wsl.md#start-openwebui) generate it without overwriting an existing configuration.
 
 `OPENWEBUI_IMAGE` defaults to the mutable `main` tag. A tested release tag or digest is needed for a repeatable deployment; this repository does not yet pin one.
 

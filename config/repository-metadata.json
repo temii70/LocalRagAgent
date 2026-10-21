@@ -1,0 +1,10 @@
+{
+  "description": "Local document Q&A and coding workspace using Ollama, hybrid retrieval, and BGE reranking.",
+  "topics": [
+    "rag",
+    "mcp",
+    "ollama",
+    "llm-agents",
+    "reranking"
+  ]
+}
