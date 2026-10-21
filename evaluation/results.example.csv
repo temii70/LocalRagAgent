@@ -1,0 +1,4 @@
+evidence_type,run_id,query_id,k,relevant_document_ids,retrieved_document_ids,relevant_count,relevant_retrieved,recall_at_k,hit_at_k
+illustrative,handwritten-format-demo,demo-01,5,storage-policy|backup-policy,storage-policy|access-policy|incident-response|gpu-budget|retrieval-guide,2,1,0.500000,1
+illustrative,handwritten-format-demo,demo-02,5,access-policy|incident-response,access-policy|incident-response|storage-policy|backup-policy|gpu-budget,2,2,1.000000,1
+illustrative,handwritten-format-demo,demo-03,5,gpu-budget|retrieval-guide,gpu-budget|retrieval-guide|storage-policy|backup-policy|access-policy,2,2,1.000000,1
