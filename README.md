@@ -4,12 +4,23 @@ A privacy-focused, GPU-accelerated AI workspace powered by OpenWebUI, Ollama, hy
 
 ## Watch the demos
 
-| [Document Q&A with source verification](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/01-document-qa.mp4) | [Local coding with GPT-OSS](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/assets/demo/02-local-coding-web.mp4) |
-| --- | --- |
-| [![Animated recording of Qwen answering questions using synthetic document sources](assets/demo/document-qa.gif)](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/01-document-qa.mp4) | [![Animated recording of Continue proposing a retrieval metric fix in VS Code](assets/demo/local-coding.gif)](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/assets/demo/02-local-coding-web.mp4) |
-| Qwen answers questions from the Demo Workspace documents with source citations. | Continue proposes a fix to a recall calculation using GPT-OSS. |
+### Document Q&A with source verification
 
-These are looping GIF previews. Click a preview to open or download the full-resolution MP4. Recordings are edited for brevity.
+Qwen answers questions from the Demo Workspace documents with source citations.
+
+[![Animated recording of Qwen answering questions using synthetic document sources](assets/demo/document-qa.gif)](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/assets/demo/document-qa.gif)
+
+[Open full-size animation](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/assets/demo/document-qa.gif) | [Full-resolution MP4](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/01-document-qa.mp4)
+
+### Local coding with GPT-OSS
+
+Continue proposes a fix to a recall calculation using GPT-OSS.
+
+[![Animated recording of Continue proposing a retrieval metric fix in VS Code](assets/demo/local-coding.gif)](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/assets/demo/local-coding.gif)
+
+[Open full-size animation](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/assets/demo/local-coding.gif) | [Full-resolution MP4](https://raw.githubusercontent.com/temii70/LocalRagAgent/main/assets/demo/02-local-coding-web.mp4)
+
+These are looping GIF previews. Click an animation to view it at full size; the MP4 links open or download the full-resolution recordings. Recordings are edited for brevity.
 
 I built the integration, model configuration, retrieval evaluation, and approval-based workflows around an existing local AI stack. It brings document Q&A, coding assistance, and reviewed tool actions onto a Windows 11 workstation with WSL2 and a single RTX 4080 Super.
 
