@@ -1,0 +1,7 @@
+Document ID: access-policy
+Title: Fictional demo message approval authority
+
+This is original synthetic content for a fictional workspace. The human operator
+of the demo account must approve each proposed outgoing message. A model may
+prepare a proposal but cannot approve it. The preview includes the sending
+account, recipients, subject, body, and attachments before execution is permitted.

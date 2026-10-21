@@ -1,0 +1,7 @@
+Document ID: incident-response
+Title: Fictional demo approval invalidation procedure
+
+This is original synthetic content for a fictional workspace. If a proposed tool
+request changes after approval, execution is blocked. The operator must inspect
+and approve the complete updated request. Missing, expired, or previously used
+approvals are rejected. A retry must not silently reuse authorization.
