@@ -1,0 +1,24 @@
+name: Local RAG Coding
+version: 1.0.0
+schema: v1
+
+# localhost refers to the machine/WSL environment running the VS Code extension.
+# Point both entries at the SAME Ollama server used by OpenWebUI.
+models:
+  - name: Qwen Fast 32K
+    provider: ollama
+    model: qwen3.5-32k
+    apiBase: http://localhost:11434
+    roles: [chat, edit, apply]
+    capabilities: [tool_use]
+    defaultCompletionOptions:
+      contextLength: 32768
+
+  - name: GPT-OSS Reasoning 16K
+    provider: ollama
+    model: gpt-oss-16k
+    apiBase: http://localhost:11434
+    roles: [chat, edit, apply]
+    capabilities: [tool_use]
+    defaultCompletionOptions:
+      contextLength: 16384
