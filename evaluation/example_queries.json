@@ -1,0 +1,20 @@
+[
+  {
+    "query_id": "demo-01",
+    "query": "When are temporary snippets removed, and how long do demo backups retain them?",
+    "relevant_document_ids": ["storage-policy", "backup-policy"],
+    "notes": "Synthetic only. Requires the live-cache and backup retention policies."
+  },
+  {
+    "query_id": "demo-02",
+    "query": "Who approves a proposed outgoing demo message, and what happens if its arguments change?",
+    "relevant_document_ids": ["access-policy", "incident-response"],
+    "notes": "Synthetic only. Both the approval authority and invalidation rule are relevant."
+  },
+  {
+    "query_id": "demo-03",
+    "query": "Why run one generator at a time, and when should embedding requests be batched?",
+    "relevant_document_ids": ["gpu-budget", "retrieval-guide"],
+    "notes": "Synthetic only. Connects VRAM budgeting to ingestion scheduling."
+  }
+]
