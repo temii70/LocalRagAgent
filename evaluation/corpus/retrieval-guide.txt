@@ -1,0 +1,8 @@
+Document ID: retrieval-guide
+Title: Fictional demo ingestion schedule
+
+This is original synthetic content for a fictional workspace. Batch embedding
+requests during document ingestion before an interactive generation session.
+When the server permits only one loaded model, embedding requests may evict the
+active generator and introduce reload delays. Preserve document IDs in chunks
+so retrieval results can be mapped back to distinct source documents.

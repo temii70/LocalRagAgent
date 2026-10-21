@@ -1,0 +1,7 @@
+Document ID: gpu-budget
+Title: Fictional demo GPU scheduling note
+
+This is original synthetic content for a fictional workspace. The demo schedules
+one generation model at a time to leave memory for context caches and runtime
+buffers. The generator and embedding model share the same local model server.
+Disk size alone does not establish that both models fit in GPU memory together.
