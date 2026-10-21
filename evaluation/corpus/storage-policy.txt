@@ -1,0 +1,7 @@
+Document ID: storage-policy
+Title: Fictional demo workspace cache policy
+
+This is original synthetic content for a fictional workspace, not an operational
+policy for the repository. Temporary extracted snippets are removed from the live
+cache after seven days. Backup retention follows the separate backup policy.
+Removal from the live cache does not immediately remove a backup copy.

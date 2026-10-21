@@ -1,0 +1,7 @@
+Document ID: backup-policy
+Title: Fictional demo workspace backup policy
+
+This is original synthetic content for a fictional workspace. Demo backups retain
+their snapshots for thirty days, including snippets present at snapshot time.
+After that period the snapshots expire. Live-cache deletion and backup expiration
+are separate processes; consult the storage policy for live-cache retention.
