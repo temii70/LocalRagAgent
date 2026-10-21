@@ -2,6 +2,8 @@
 
 [Project overview](../README.md)
 
+Ready to record: the [demo guide](../docs/demo-guide.md) has three short video scripts, copyable prompts, expected source passages, and terminal commands. The [Continue starter exercise](demo/recall_exercise.py.txt) is deliberately flawed; use the disposable copy described in that guide. Keep raw clips in ignored `assets/recordings/` and link reviewed, hosted videos from the root README.
+
 No screenshots have been supplied. The slots below point to recommended filenames without embedding missing images. Capture the real system using synthetic documents and a separate demo account, then add image links to the root README.
 
 | Recommended filename | Capture |

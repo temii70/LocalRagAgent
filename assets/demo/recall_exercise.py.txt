@@ -1,0 +1,35 @@
+"""Intentionally flawed Continue demo exercise; not the project's evaluator.
+
+Copy to the ignored evaluation/runs/continue-demo folder before editing.
+The starter should fail one case. A correct fix should pass all five.
+"""
+
+
+def recall_at_k(relevant_ids, retrieved_ids, k):
+    if k < 1:
+        raise ValueError("k must be positive")
+    relevant = set(relevant_ids)
+    if not relevant:
+        raise ValueError("at least one relevant document is required")
+    top = list(dict.fromkeys(retrieved_ids))[:k]
+    # Intentional bug: this is a hit indicator, not recall.
+    return float(bool(relevant.intersection(top)))
+
+
+if __name__ == "__main__":
+    cases = [
+        ("partial recall", ["a", "b"], ["a", "x"], 2, 0.5),
+        ("empty retrieval", ["a"], [], 5, 0.0),
+        ("duplicate documents", ["a", "b"], ["a", "a", "b"], 2, 1.0),
+        ("cutoff excludes match", ["a"], ["x", "a"], 1, 0.0),
+        ("no relevant matches", ["a"], ["x", "y"], 5, 0.0),
+    ]
+    passed = 0
+    for label, relevant, retrieved, k, expected in cases:
+        actual = recall_at_k(relevant, retrieved, k)
+        ok = actual == expected
+        passed += ok
+        status = "PASS" if ok else "FAIL"
+        print(f"{status}: {label}: expected {expected}, got {actual}")
+    print(f"{passed}/{len(cases)} cases passed")
+    raise SystemExit(0 if passed == len(cases) else 1)

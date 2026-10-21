@@ -8,6 +8,13 @@ I built the integration, model configuration, retrieval evaluation, and approval
 
 This repository contains deployment configuration, setup notes, and a synthetic evaluation example. The language models, document parser, retrieval implementation, and storage engine come from the credited upstream projects.
 
+## Demos
+
+| Video | What it shows |
+| --- | --- |
+| [Document Q&A with source verification](01-document-qa.mp4) | Questions answered from the synthetic Demo Workspace documents, with supporting source citations. |
+| [Local coding with GPT-OSS: fixing a retrieval metric bug](02-local-coding.mp4..mp4) | Continue proposing a focused code fix, followed by a check of the corrected result. |
+
 ## What it does
 
 - Keeps inference and configured document processing on local hardware, reducing the need to send document text to hosted inference services.
@@ -145,6 +152,8 @@ The private Gmail workflow requires a person to inspect and approve each propose
 Use synthetic or appropriately licensed public documents and a separate demo account. Do not expose port 3000 publicly without authentication and appropriate network controls.
 
 ## Screenshots
+
+The two demo videos are linked above. The [demo recording guide](docs/demo-guide.md) includes the sample prompts, expected source evidence, and an optional GPU recording.
 
 Screenshot placeholders and capture guidance live in [assets/README.md](assets/README.md). Add `workspace-overview.png`, `rag-citations.png`, `continue-local-models.png`, `tool-approval.png`, and `gpu-memory.png` after redacting account data and private content. No screenshots or benchmark graphics are fabricated here.
 
