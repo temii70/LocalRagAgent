@@ -1,0 +1,18 @@
+# Ollama runs on the host/WSL; this service needs no GPU device mapping.
+services:
+  open-webui:
+    image: ${OPENWEBUI_IMAGE:-ghcr.io/open-webui/open-webui:main}
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:8080"
+    environment:
+      # Docker Desktop resolves host.docker.internal to the Windows host.
+      # WSL NAT/mirrored networking may require a different reachable host URL.
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      WEBUI_AUTH: "true"
+      WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY:?Generate a private WEBUI_SECRET_KEY in .env before starting}
+    volumes:
+      - open-webui-data:/app/backend/data
+
+volumes:
+  open-webui-data:
