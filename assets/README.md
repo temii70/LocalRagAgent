@@ -1,10 +1,12 @@
-# Screenshot placeholders
+# Demo assets and screenshots
 
 [Project overview](../README.md)
 
-Ready to record: the [demo guide](../docs/demo-guide.md) has three short video scripts, copyable prompts, expected source passages, and terminal commands. The [Continue starter exercise](demo/recall_exercise.py.txt) is deliberately flawed; use the disposable copy described in that guide. Keep raw clips in ignored `assets/recordings/` and link reviewed, hosted videos from the root README.
+The root README links the [document Q&A video](../01-document-qa.mp4) and [local coding video](../02-local-coding.mp4..mp4). Their clickable preview images are actual stills from those recordings, stored in `demo/`.
 
-No screenshots have been supplied. The slots below point to recommended filenames without embedding missing images. Capture the real system using synthetic documents and a separate demo account, then add image links to the root README.
+The [Continue starter exercise](demo/recall_exercise.py.txt) intentionally contains a recall calculation bug. Copy it into an ignored `evaluation/runs/continue-demo/` folder before editing; the starter should pass four of five cases, and a correct fix should pass all five. The working project scorer is [evaluation/score.py](../evaluation/score.py). Keep raw takes in ignored `assets/recordings/`.
+
+The additional screenshot slots below point to recommended filenames without embedding missing images. Capture the real system using synthetic documents and a separate demo account, then add image links to the root README.
 
 | Recommended filename | Capture |
 | --- | --- |

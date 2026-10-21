@@ -2,18 +2,20 @@
 
 A privacy-focused, GPU-accelerated AI workspace powered by OpenWebUI, Ollama, hybrid retrieval, reranking, and permission-gated MCP tools.
 
+## Watch the demos
+
+| [Document Q&A with source verification](01-document-qa.mp4) | [Local coding with GPT-OSS](02-local-coding.mp4..mp4) |
+| --- | --- |
+| [![Qwen answering a question using synthetic document sources](assets/demo/document-qa-preview.png)](01-document-qa.mp4) | [![Continue proposing a fix to a retrieval metric in VS Code](assets/demo/local-coding-preview.png)](02-local-coding.mp4..mp4) |
+| Qwen answers questions from the Demo Workspace documents with source citations. | Continue proposes a focused fix to a recall calculation using GPT-OSS. |
+
+Click either preview to open the video. Recordings are edited for brevity.
+
 I built the integration, model configuration, retrieval evaluation, and approval-based workflows around an existing local AI stack. It brings document Q&A, coding assistance, and reviewed tool actions onto a Windows 11 workstation with WSL2 and a single RTX 4080 Super.
 
 **Reported use:** more than 100 lecture/research documents tested; top-5 retrieval recall improved from **64% to 86%** after hybrid retrieval and reranking; more than 200 outreach/follow-up emails assisted through a user-approved Gmail workflow. These are owner-reported observations. The private corpus, original relevance labels, and run logs are not included, so this repository does not independently verify those figures.
 
 This repository contains deployment configuration, setup notes, and a synthetic evaluation example. The language models, document parser, retrieval implementation, and storage engine come from the credited upstream projects.
-
-## Demos
-
-| Video | What it shows |
-| --- | --- |
-| [Document Q&A with source verification](01-document-qa.mp4) | Questions answered from the synthetic Demo Workspace documents, with supporting source citations. |
-| [Local coding with GPT-OSS: fixing a retrieval metric bug](02-local-coding.mp4..mp4) | Continue proposing a focused code fix, followed by a check of the corrected result. |
 
 ## What it does
 
@@ -153,7 +155,7 @@ Use synthetic or appropriately licensed public documents and a separate demo acc
 
 ## Screenshots
 
-The two demo videos are linked above. The [demo recording guide](docs/demo-guide.md) includes the sample prompts, expected source evidence, and an optional GPU recording.
+The two demo videos and their clickable previews are at the top of this README.
 
 Screenshot placeholders and capture guidance live in [assets/README.md](assets/README.md). Add `workspace-overview.png`, `rag-citations.png`, `continue-local-models.png`, `tool-approval.png`, and `gpu-memory.png` after redacting account data and private content. No screenshots or benchmark graphics are fabricated here.
 
