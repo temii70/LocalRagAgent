@@ -1,8 +1,10 @@
 # Local RAG & Agent Platform
 
-**Public retrieval benchmark:** on 75 labeled SciFact claims against 5,183 abstracts, dense retrieval scored **81.89% recall@5** and hybrid + BGE scored **79.78%**. [Measured results and reproduction](evaluation/results/scifact-75/README.md).
+A local RAG workspace, a reproducible public retrieval benchmark, and an approval-gated mock mail MCP server.
 
-A local document Q&A and coding workspace built around OpenWebUI, Ollama, hybrid retrieval, reranking, and reviewed tool workflows.
+[![CI](https://github.com/temii70/LocalRagAgent/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/temii70/LocalRagAgent/actions/workflows/verify.yml)
+
+**Public retrieval benchmark:** on 75 labeled SciFact claims against 5,183 abstracts, dense retrieval scored **81.89% recall@5** and hybrid + BGE scored **79.78%**. [Measured results and reproduction](evaluation/results/scifact-75/README.md).
 
 ## Demos
 

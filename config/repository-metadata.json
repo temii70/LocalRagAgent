@@ -1,10 +1,11 @@
 {
-  "description": "Local document Q&A and coding workspace using Ollama, hybrid retrieval, and BGE reranking.",
+  "description": "Local RAG workspace, reproducible retrieval benchmark, and approval-gated mock mail MCP server.",
   "topics": [
     "rag",
     "mcp",
     "ollama",
     "llm-agents",
+    "evaluation",
     "reranking"
   ]
 }
