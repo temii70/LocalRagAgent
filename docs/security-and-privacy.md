@@ -47,3 +47,7 @@ Use trusted parser and model sources. Test document ingestion with synthetic fil
 Initial image/model downloads require network access. Default update checks, extension telemetry, web search, remote OCR, cloud providers, and external tools can also make outbound requests. Gmail content necessarily crosses the local boundary when an approved request uses Gmail.
 
 For an offline demonstration, prefetch dependencies, select local extraction/embedding/reranking/generation backends, disable unneeded integrations, and verify outbound behavior. Do not describe the minimal Compose file as an air-gapped deployment.
+
+## Public mock approval boundary
+
+The [credential-free mock](../mock_mcp/README.md) implements exact-argument approvals, five-minute expiry, single-use execution, and transactional audit records. The model cannot approve through MCP. This is a local demonstration: the operator and OS account are trusted, and shell or database access can bypass the boundary. Audit records are not tamper-proof. Synthetic messages and state stay in an ignored SQLite database; there is no Gmail or SMTP client. It does not validate the private connector or the reported email count.

@@ -63,3 +63,7 @@ The private Gmail workflow follows an approval-based operating process; its enfo
 ## Reproduction boundary
 
 The [setup guide](setup-windows-wsl.md) reproduces local chat and explains manual RAG configuration. The [evaluation folder](../evaluation/README.md) reproduces the public scoring format. It cannot reproduce the original private corpus or historical 64%/86% result. No service, credential, or saved private database is bundled.
+
+## Public mock MCP execution
+
+The [mock mail server](../mock_mcp/README.md) exposes four stdio tools using the official MCP SDK. A proposal stores exact arguments and their digest. A separate interactive terminal reviewer approves or denies it; no approval tool is exposed to the model. Execution checks the digest, expiry, and approval state inside a SQLite write transaction, then records a synthetic outbox entry, consumes approval, and appends an audit event atomically. There is no external mail transport. The local OS account remains trusted.

@@ -30,7 +30,7 @@ I built this workspace to work with local documents, get coding assistance in VS
 
 My work covers the integration, model configuration, retrieval evaluation, and approval-based workflows. OpenWebUI, Ollama, Docling, and the other upstream projects provide the models, parsing, retrieval, and storage components.
 
-The public repository includes deployment configuration, setup documentation, a measured retrieval benchmark with published labels and rankings, and a synthetic demo corpus. Private documents and the Gmail connector are excluded.
+The public repository includes deployment configuration, setup documentation, a measured retrieval benchmark with published labels and rankings, and a synthetic demo corpus. Private documents and the Gmail connector are excluded. A [credential-free mock mail MCP server](mock_mcp/README.md) demonstrates exact-argument human approvals, one-time execution, and audit records.
 
 ## What it does
 
@@ -66,7 +66,7 @@ flowchart LR
     MCP -. External service .-> Gmail[Gmail demo account]
 ```
 
-The diagram covers the full workspace. Compose starts OpenWebUI; Ollama and optional Docling services run separately. Retrieval settings are documented in the [setup guide](docs/setup-windows-wsl.md#configure-document-retrieval). The MCP/Gmail path represents a separate private integration; its connector and approval gate are not part of the public runtime.
+The diagram covers the full workspace. Compose starts OpenWebUI; Ollama and optional Docling services run separately. Retrieval settings are documented in the [setup guide](docs/setup-windows-wsl.md#configure-document-retrieval). The MCP/Gmail path represents a separate private integration. The public [mock MCP server](mock_mcp/README.md) demonstrates its approval pattern using synthetic messages and a local outbox; it has no Gmail connection.
 
 Ollama can run on Windows or in WSL2. Each installation has its own model store, so chat and embedding endpoints must point to the intended instance. The setup guide uses WSL2 as the reference deployment.
 
@@ -196,7 +196,7 @@ MCP defines tool communication; approval must be enforced by the client or execu
 - A 16 GB GPU limits context size, concurrency, and simultaneous model residency.
 - Compose starts the UI; the full retrieval pipeline needs additional configuration.
 - OpenWebUI and Docling versions are not pinned, so configuration and API compatibility can change.
-- The private MCP/Gmail connector and approval implementation are not included.
+- The private MCP/Gmail connector is not included; the public mock demonstrates approvals without real email delivery.
 
 ## Roadmap
 
@@ -204,7 +204,7 @@ MCP defines tool communication; approval must be enforced by the client or execu
 - Test candidate depth, truncation, and fusion settings with separate development data.
 - Pin deployment images and Docling versions independently of the recorded benchmark runtime.
 - Benchmark latency, memory, OCR quality, and model switching with fixed inputs.
-- Package a credential-free mock MCP server with enforceable approvals and audit records.
+- Extend the public mock MCP server with additional synthetic tool workflows.
 
 ## Credits and license
 
