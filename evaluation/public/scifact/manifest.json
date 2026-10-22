@@ -92,7 +92,7 @@
     "1359",
     "1379"
   ],
-  "queries_sha256": "e0d15dab146a13109b3b030ac4fca3dc013ca8e900fb0d2392c84d8d26b52b1e",
+  "queries_sha256": "866939d5a8c6d6168d1b444fcb94cf69a301c55cf166688beb9dc85d1975f194",
   "qrels_sha256": "a4259154ed6097fb87e103cd9b9d9be1c5510010a46c15329aeeb2bb889d5cad",
   "label_provenance": "Published BEIR SciFact test qrels; no model-generated relevance labels",
   "selection_note": "Frozen before retrieval; fixed configurations, no parameter search on this subset",
