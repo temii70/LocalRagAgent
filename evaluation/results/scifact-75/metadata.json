@@ -1,8 +1,8 @@
 {
   "evidence_type": "measured",
-  "completed_at_utc": "2026-10-21T23:53:51.890655+00:00",
+  "completed_at_utc": "2026-10-22T00:03:36.295040+00:00",
   "dataset_manifest_sha256": "f8182af603e56df3f449cfdd2f46796bc08d39d58226c1f557c82bd4aee9bee4",
-  "runner_sha256": "e4f6f12b7220f9d0efc3e7feb3f4b9e1ac4c47fe737f48963ce0a4c5e028926f",
+  "runner_sha256": "19c7c7fedb922e259dbf967857906aca72468ee7a45e38b6cf71823a0b18306e",
   "scorer_sha256": "2874b59b9917405ac56d8d0f20f9b97713dd2963c5ba2ca9bdeca8e030cb989a",
   "config_sha256": "c39cb9e355ac6332e353876dc37cf6c57f89c313e8049203894520cf7c548644",
   "config": {
@@ -33,10 +33,7 @@
     "platform": "Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.34",
     "ollama_version": "0.40.3",
     "container_image": "quay.io/docling-project/docling-serve-cu128@sha256:5ba5427efe6f024f435c6ad5fef7c828e47aaf5b1fe1e7ec5af952ac580f7b8e",
-    "embedding_placement_bytes": {
-      "size": 323150151,
-      "size_vram": 323150151
-    },
+    "embedding_placement_bytes": {},
     "gpu": "NVIDIA GeForce RTX 4080 SUPER",
     "packages": {
       "numpy": "2.4.2",
@@ -96,8 +93,8 @@
     "documents_reused": true,
     "queries_reused": true
   },
-  "embedding_phase_seconds": 0.13003508999827318,
-  "total_seconds": 30.707961898995563,
+  "embedding_phase_seconds": 0.14941550898947753,
+  "total_seconds": 31.12984186797985,
   "paired_bootstrap_hybrid_bge_minus_dense": {
     "mean_delta": -0.021111111111111112,
     "percentile_95_ci": [

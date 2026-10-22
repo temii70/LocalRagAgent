@@ -1,10 +1,23 @@
-# Public evaluation example
+# Retrieval evaluation
 
 [Method and evidence limits](../docs/evaluation.md) | [Project overview](../README.md)
 
-This folder contains original synthetic content and **illustrative**, handwritten rankings. They do not contain private lecture/research text and do not reproduce the owner-reported 64%/86% experiment. No benchmark results are fabricated as measurements.
+This folder contains two separate evaluation tracks:
 
-## Files
+- **[Measured public benchmark](public/scifact/README.md):** 75 published, labeled BEIR SciFact test claims against all 5,183 abstracts. [Results and raw rankings](results/scifact-75/README.md) compare dense, BM25, hybrid, and hybrid+BGE retrieval.
+- **Synthetic format example:** six original fictional documents and handwritten rankings that demonstrate the scoring schema. These remain explicitly labeled `illustrative`.
+
+Neither track reproduces the earlier private 64%/86% observation. The public benchmark has its own measured results and source judgments.
+
+## Verify measured results
+
+```powershell
+python evaluation/verify_public.py
+```
+
+This independent check needs only Python's standard library and no model server. Full inference instructions, model pins, and dataset attribution are in the [public benchmark guide](public/scifact/README.md).
+
+## Synthetic format example files
 
 | File | Purpose |
 | --- | --- |

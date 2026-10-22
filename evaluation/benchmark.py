@@ -75,7 +75,7 @@ def embed(texts, prefix, label, cache, config, endpoint):
     }
     name = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
     array_path, info_path = cache / (name + ".npy"), cache / (name + ".json")
-    if array_path.exists() and info_path.exists() and json.loads(info_path.read_text()) == identity:
+    if array_path.exists() and info_path.exists() and json.loads(info_path.read_text(encoding="utf-8")) == identity:
         array = np.load(array_path, allow_pickle=False)
         if array.shape[0] == len(texts) and array.ndim == 2 and np.isfinite(array).all():
             print(f"Using verified {label} embedding cache: {len(texts)} rows", flush=True)
@@ -130,8 +130,8 @@ def predict_pairs(model, tokenizer, pairs, config):
 
 def run(args):
     started = time.perf_counter()
-    config = json.loads(args.config.read_text())
-    manifest = json.loads((args.dataset / "manifest.json").read_text())
+    config = json.loads(args.config.read_text(encoding="utf-8"))
+    manifest = json.loads((args.dataset / "manifest.json").read_text(encoding="utf-8"))
     query_path = args.dataset / "queries.json"
     if sha256(query_path) != manifest["queries_sha256"]:
         raise ValueError("Frozen queries have changed")
@@ -140,8 +140,8 @@ def run(args):
     corpus_path = args.cache / "corpus.jsonl"
     if sha256(corpus_path) != manifest["member_sha256"]["corpus.jsonl"]:
         raise ValueError("Corpus checksum mismatch; run prepare_public.py first")
-    queries = json.loads(query_path.read_text())
-    corpus = [json.loads(line) for line in corpus_path.read_text().splitlines() if line]
+    queries = json.loads(query_path.read_text(encoding="utf-8"))
+    corpus = [json.loads(line) for line in corpus_path.read_text(encoding="utf-8").splitlines() if line]
     assert len(corpus) == manifest["corpus_documents"]
     assert [query["query_id"] for query in queries] == manifest["query_ids"]
     if args.output.exists():

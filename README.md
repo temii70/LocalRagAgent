@@ -1,6 +1,8 @@
 # Local RAG & Agent Platform
 
-A privacy-focused, GPU-accelerated AI workspace powered by OpenWebUI, Ollama, hybrid retrieval, reranking, and permission-gated MCP tools.
+**Public retrieval benchmark:** on 75 labeled SciFact claims against 5,183 abstracts, dense retrieval scored **81.89% recall@5** and hybrid + BGE scored **79.78%**. [Measured results and reproduction](evaluation/results/scifact-75/README.md).
+
+A local document Q&A and coding workspace built around OpenWebUI, Ollama, hybrid retrieval, reranking, and reviewed tool workflows.
 
 ## Demos
 
@@ -28,7 +30,7 @@ I built this workspace to work with local documents, get coding assistance in VS
 
 My work covers the integration, model configuration, retrieval evaluation, and approval-based workflows. OpenWebUI, Ollama, Docling, and the other upstream projects provide the models, parsing, retrieval, and storage components.
 
-The public repository includes deployment configuration, setup documentation, a synthetic document corpus, and an offline retrieval scorer. Private documents and the Gmail connector are excluded.
+The public repository includes deployment configuration, setup documentation, a measured retrieval benchmark with published labels and rankings, and a synthetic demo corpus. Private documents and the Gmail connector are excluded.
 
 ## What it does
 
@@ -36,7 +38,7 @@ The public repository includes deployment configuration, setup documentation, a 
 - **Two-model workflow:** Qwen for routine work; GPT-OSS for reasoning and debugging.
 - **Document retrieval:** semantic and keyword search with BGE reranking and source references.
 - **Editor integration:** Continue connects VS Code to the local model server.
-- **Evaluation:** synthetic relevance labels, example rankings, and a document-level recall scorer.
+- **Evaluation:** a frozen public SciFact subset, four measured retrieval configurations, raw rankings, and an offline result verifier.
 
 [Setup](docs/setup-windows-wsl.md) | [Architecture](docs/architecture.md) | [Evaluation](docs/evaluation.md) | [Security](docs/security-and-privacy.md)
 
@@ -107,24 +109,26 @@ OpenWebUI supplies the retrieval and storage integration. The [upstream RAG docu
 
 ## Retrieval evaluation
 
-The system has been tested on more than 100 lecture/research documents. Reported local results:
+The benchmark searches all **5,183 SciFact abstracts** for **75 existing, labeled claims** sampled from the BEIR test split with seed 42. The claim IDs and published relevance judgments were frozen before retrieval. No parameters were tuned on this sample.
 
-| Configuration | Top-5 recall |
-| --- | ---: |
-| Original baseline | 64% |
-| Hybrid retrieval + BGE reranking | 86% |
+| Configuration | Macro recall@5 | Hit rate@5 |
+| --- | ---: | ---: |
+| Nomic dense retrieval | **81.89%** | 84.00% |
+| BM25 | 74.78% | 78.67% |
+| Hybrid RRF | 81.78% | **85.33%** |
+| Hybrid RRF + BGE reranking | 79.78% | 82.67% |
 
-The reported improvement is **22 percentage points**. Recall measures the fraction of labeled relevant documents found in the retrieved set, separately from answer correctness.
+**Reranking did not improve recall in this run.** Hybrid+BGE was 2.11 percentage points below dense retrieval; the paired bootstrap 95% interval is [-9.89, +5.67] percentage points. This small sample does not establish a reliable advantage for either configuration.
 
-The original corpus, query set, relevance labels, run logs, and exact baseline configuration are not published. The historical scoring details are incomplete, so these figures cannot be reproduced from the public example. The [evaluation notes](docs/evaluation.md) document those limits and define a protocol for new runs.
+Recall measures the fraction of labeled relevant abstracts found in the top five; hit rate measures whether at least one was found. The [full report](evaluation/results/scifact-75/README.md) includes every query's rankings and scores, candidate coverage, exact model identities, and runtime metadata. The [benchmark guide](evaluation/public/scifact/README.md) documents the dataset license and full inference rerun.
 
-The public example includes [synthetic queries](evaluation/example_queries.json), [illustrative rankings](evaluation/predictions.example.json), and a [Python standard-library scorer](evaluation/score.py):
+The published scores can be checked without a GPU, model server, or extra Python packages:
 
 ```powershell
-python evaluation/score.py --queries evaluation/example_queries.json --predictions evaluation/predictions.example.json --output evaluation/runs/example.csv
+python evaluation/verify_public.py
 ```
 
-This command scores supplied rankings. The example rankings are handwritten and labeled `illustrative`; they are separate from the reported private experiment. Schema and scoring details are in [evaluation/README.md](evaluation/README.md).
+This independently recomputes the recorded metrics and validates the artifacts. The harness measures retrieval over abstract text, not OCR, answer quality, or OpenWebUI end-to-end behavior. It is a 75-claim subset, not the full BEIR benchmark. Earlier private observations are documented separately in the [evaluation notes](docs/evaluation.md); the [synthetic format example](evaluation/README.md) remains explicitly illustrative.
 
 ## Hardware
 
@@ -141,7 +145,7 @@ RAM and disk figures are estimates, not measured minimum requirements. Smaller m
 
 Prerequisites: WSL2 with Ubuntu, a Windows NVIDIA driver with WSL CUDA support, Docker Desktop using the WSL2 backend, and Ollama installed inside WSL. Installation and networking details are in the [setup guide](docs/setup-windows-wsl.md).
 
-**Models** â€” in a WSL terminal at the repository root:
+**Models** - in a WSL terminal at the repository root:
 
 ```bash
 ollama pull qwen3.5:9b
@@ -153,7 +157,7 @@ ollama show qwen3.5-32k --parameters
 ollama show gpt-oss-16k --parameters
 ```
 
-**OpenWebUI** â€” `.env.example` provides the environment template. A private `.env` requires a random `WEBUI_SECRET_KEY`; [PowerShell setup steps](docs/setup-windows-wsl.md#start-openwebui) generate it without overwriting an existing configuration.
+**OpenWebUI** - `.env.example` provides the environment template. A private `.env` requires a random `WEBUI_SECRET_KEY`; [PowerShell setup steps](docs/setup-windows-wsl.md#start-openwebui) generate it without overwriting an existing configuration.
 
 `OPENWEBUI_IMAGE` defaults to the mutable `main` tag. A tested release tag or digest is needed for a repeatable deployment; this repository does not yet pin one.
 
@@ -186,7 +190,8 @@ MCP defines tool communication; approval must be enforced by the client or execu
 
 ## Limitations
 
-- Private evaluation evidence and incomplete historical settings limit reproducibility of the reported results.
+- The public benchmark uses 75 of 300 BEIR SciFact test claims; it does not establish full-benchmark or cross-domain performance.
+- Pretrained model exposure to SciFact has not been audited, and retrieval metrics do not measure generated answer correctness.
 - OCR errors, missed passages, and unsupported generated claims still require source review.
 - A 16 GB GPU limits context size, concurrency, and simultaneous model residency.
 - Compose starts the UI; the full retrieval pipeline needs additional configuration.
@@ -195,8 +200,9 @@ MCP defines tool communication; approval must be enforced by the client or execu
 
 ## Roadmap
 
-- Publish a larger synthetic corpus with recorded relevance judgments and real retrieval exports.
-- Record tested image digests, Docling versions, chunking settings, and retrieval configuration.
+- Extend the public evaluation to all 300 BEIR SciFact test claims and additional corpora.
+- Test candidate depth, truncation, and fusion settings with separate development data.
+- Pin deployment images and Docling versions independently of the recorded benchmark runtime.
 - Benchmark latency, memory, OCR quality, and model switching with fixed inputs.
 - Package a credential-free mock MCP server with enforceable approvals and audit records.
 
@@ -204,4 +210,4 @@ MCP defines tool communication; approval must be enforced by the client or execu
 
 Built with [OpenWebUI](https://github.com/open-webui/open-webui), [Ollama](https://github.com/ollama/ollama), [Docling](https://github.com/docling-project/docling), [Qwen](https://github.com/QwenLM/Qwen3.5), [GPT-OSS](https://github.com/openai/gpt-oss), [Nomic embeddings](https://ollama.com/library/nomic-embed-text), [BGE / FlagEmbedding](https://github.com/FlagOpen/FlagEmbedding), [Continue](https://github.com/continuedev/continue), and [MCP](https://modelcontextprotocol.io/).
 
-Original configuration, documentation, and evaluation utilities are covered by [Apache License 2.0](LICENSE). Upstream software and model weights retain their respective licenses and notices. Their source code and weights are not redistributed here.
+Original configuration, documentation, and evaluation utilities are covered by [Apache License 2.0](LICENSE). The selected BEIR SciFact claims and relevance judgments retain their [CC BY-SA 4.0 data license and attribution](evaluation/public/scifact/ATTRIBUTION.md). Upstream software and model weights retain their respective licenses and notices. Their source code and weights are not redistributed here.

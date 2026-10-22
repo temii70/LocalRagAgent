@@ -25,7 +25,7 @@ def prepare(cache, output, count=75, seed=42):
     if count < 1:
         raise ValueError("count must be positive")
     manifest_path = output / "manifest.json"
-    existing = json.loads(manifest_path.read_text()) if manifest_path.exists() else None
+    existing = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else None
     if existing and (existing["selected_queries"] != count or existing["selection"]["seed"] != seed):
         raise ValueError("Selection already frozen with different settings; use a new output folder")
     cache.mkdir(parents=True, exist_ok=True)
@@ -75,7 +75,7 @@ def prepare(cache, output, count=75, seed=42):
     if existing:
         if hashlib.sha256(data).hexdigest() != existing["archive_sha256"]:
             raise ValueError("Archive differs from the frozen manifest")
-        if public_queries != json.loads((output / "queries.json").read_text()):
+        if public_queries != json.loads((output / "queries.json").read_text(encoding="utf-8")):
             raise ValueError("Frozen query selection differs from the source labels")
         for filename, field in [("queries.json", "queries_sha256"), ("qrels.tsv", "qrels_sha256")]:
             if hashlib.sha256((output / filename).read_bytes()).hexdigest() != existing[field]:
