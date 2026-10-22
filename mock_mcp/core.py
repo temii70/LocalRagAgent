@@ -1,6 +1,7 @@
 """Transactional mock mailbox; no credentials, network clients, or real delivery."""
 
 import hashlib
+from contextlib import contextmanager
 import json
 import sqlite3
 import time
@@ -49,10 +50,15 @@ class Mailbox:
                     event TEXT NOT NULL, proposal_id TEXT, detail TEXT NOT NULL);
             """)
 
+    @contextmanager
     def connect(self):
         db = sqlite3.connect(self.path, timeout=10)
         db.row_factory = sqlite3.Row
-        return db
+        try:
+            with db:
+                yield db
+        finally:
+            db.close()
 
     def record(self, db, event, proposal_id, detail):
         db.execute("INSERT INTO audit(created,event,proposal_id,detail) VALUES (?,?,?,?)",
