@@ -45,3 +45,7 @@ The independent verifier recomputes the metrics from the published rankings, che
 The evidence supports reporting this configuration's measured behavior on this subset, including the lack of a reranking gain. It does not support claiming a general RAG improvement, answer correctness, OCR quality, or production latency. The harness uses one abstract per document and exact dense search; it does not call OpenWebUI or exercise its chunking, vector database, access controls, or tool execution.
 
 BGE processes up to 512 combined tokens per claim/abstract pair, while the embedding and lexical stages have different input handling. Candidate depth and truncation are possible subjects for future ablations, not established explanations for this result. No parameters were changed to chase a positive gain after seeing these scores. Pretrained models' training overlap with SciFact has not been established.
+
+## Checksum portability correction
+
+The initial publication recorded Windows CRLF hashes for the frozen query JSON and its manifest, while Git stores these files with LF endings. The published hashes now reference the LF bytes in a fresh checkout. Only those two hash references changed; query contents, labels, rankings, scores, and measured model outputs are unchanged. The preparation writer now emits explicit UTF-8/LF bytes. The repaired committed results were verified in a fresh clone with Windows line-ending conversion enabled.
