@@ -93,3 +93,6 @@ Thumbs.db
 
 # Raw screen recordings may include private material and large video files.
 assets/recordings/
+
+# Local mock approval state and synthetic outbox/audit records
+mock_mcp/.state/
